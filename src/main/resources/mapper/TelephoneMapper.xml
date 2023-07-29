@@ -12,6 +12,7 @@
             <id property="id" column="id"></id>
             <result property="content" column="content" jdbcType="VARCHAR"/>
         </association>
+
     </resultMap>
 
     <!--查询单个-->
