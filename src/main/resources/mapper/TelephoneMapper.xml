@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csqf.zx.mapper.BackMapper">
+
+    <resultMap type="com.csqf.zx.DO.TelephoneDO" id="TelephoneMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="tel" column="tel" jdbcType="VARCHAR"/>
+        <result property="backid" column="backid" jdbcType="INTEGER"/>
+        <result property="created" column="created" jdbcType="TIMESTAMP"/>
+
+        <association property="userBackDO" javaType="com.csqf.zx.DO.UserBackDO">
+            <id property="id" column="id"></id>
+            <result property="content" column="content" jdbcType="VARCHAR"/>
+        </association>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="backList" resultMap="TelephoneMap">
+        select
+            t.id,t.tel,t.backid,t.created,u.content
+        from telephone t left join userback u on t.backid = u.id
+    </select>
+
+    <!--新增所有列-->
+    <insert id="addBack" >
+        insert into telephone(tel,backid,created)
+        values (#{result.tel},#{result.backid},#{result.created})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="updateBack">
+        update telephone
+        set tel = #{result.tel},backid = #{result.backid},created = #{result.created}
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteBack">
+        delete from telephone where id = #{id}
+    </delete>
+
+</mapper>
+
