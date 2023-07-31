@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csqf.zx.mapper.BonusMapper">
+
+    <resultMap type="com.csqf.zx.DO.BonusDO" id="TbBonusMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="money" column="money" jdbcType="VARCHAR"/>
+        <result property="typeid" column="typeid" jdbcType="INTEGER"/>
+        <result property="created" column="created" jdbcType="TIMESTAMP"/>
+
+        <association property="identityDO" javaType="com.csqf.zx.DO.IdentityDO">
+            <id property="typeid" column="typeid"></id>
+
+            <result property="typename" column="typename" jdbcType="VARCHAR"/>
+        </association>
+    </resultMap>
+
+    <!--查询-->
+    <select id="bonusList" resultMap="TbBonusMap">
+        select b.id,b.name,b.money,b.typeid,b.created,i.typename
+             from tb_bonus b left join tb_identity i on b.typeid = i.typeid
+    </select>
+
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into tb_bonus(namemoneytypeidcreate)
+        values (#{name}#{money}#{typeid}#{create})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="updateBonus" >
+        update tb_bonus
+            set name = #{bonus.name},money = #{bonus.money},typeid = #{bonus.typeid},created = #{bonus.created}
+         where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from tb_bonus where id = #{id}
+    </delete>
+
+</mapper>
+
