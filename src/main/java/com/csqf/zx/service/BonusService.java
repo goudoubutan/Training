@@ -13,4 +13,8 @@ public interface BonusService {
     List<BonusVO> bonusList();
 
     void updateBonus(Integer id, BonusVO bonusVO);
+
+    void addBonus(BonusVO bonusVO);
+
+    void deleteBonus(Integer id);
 }

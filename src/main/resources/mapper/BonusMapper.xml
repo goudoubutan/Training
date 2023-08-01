@@ -24,9 +24,9 @@
 
 
     <!--新增所有列-->
-    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into tb_bonus(namemoneytypeidcreate)
-        values (#{name}#{money}#{typeid}#{create})
+    <insert id="addBonus">
+        insert into tb_bonus(name,money,typeid,created)
+        values (#{bonus.name},#{bonus.money},#{bonus.typeid},#{bonus.created})
     </insert>
 
     <!--通过主键修改数据-->
@@ -37,7 +37,7 @@
     </update>
 
     <!--通过主键删除-->
-    <delete id="deleteById">
+    <delete id="deleteBonus">
         delete from tb_bonus where id = #{id}
     </delete>
 

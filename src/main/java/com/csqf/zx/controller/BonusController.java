@@ -40,4 +40,21 @@ public class BonusController {
         return result;
     }
 
+    @PostMapping
+    public ResponseResult addBonus(@RequestBody BonusVO bonusVO) {
+        ResponseResult result = ResponseResult.SUCCESS();
+
+        bonusService.addBonus(bonusVO);
+
+        return result;
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseResult deleteBonus(@PathVariable Integer id) {
+        ResponseResult result = ResponseResult.SUCCESS();
+
+        bonusService.deleteBonus(id);
+
+        return result;
+    }
 }

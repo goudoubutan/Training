@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>呼叫中心系统</h1>
+    <h1>蔬菜贱卖</h1>
 <!--    <img src="./assets/logo.png">-->
     <router-view/>
   </div>

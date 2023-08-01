@@ -35,6 +35,17 @@ public class BonusServiceImpl implements BonusService {
         bonusMapper.updateBonus(id,bonusDO);
     }
 
+    @Override
+    public void addBonus(BonusVO bonusVO) {
+        BonusDO bonusDO = convert(bonusVO);
+        bonusMapper.addBonus(bonusDO);
+    }
+
+    @Override
+    public void deleteBonus(Integer id) {
+        bonusMapper.deleteBonus(id);
+    }
+
     public List<BonusVO> convert(List<BonusDO> list) {
         List<BonusVO> result = new ArrayList<BonusVO>();
 

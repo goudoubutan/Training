@@ -14,4 +14,8 @@ public interface BonusMapper {
     List<BonusDO> bonusList();
 
     void updateBonus(Integer id ,@Param("bonus") BonusDO bonusDO);
+
+    void addBonus(@Param("bonus") BonusDO bonusDO);
+
+    void deleteBonus(Integer id);
 }
