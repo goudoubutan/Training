@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csqf.zx.mapper.FoodMapper">
+
+    <resultMap type="com.csqf.zx.DO.FoodDO" id="TbFoodMap">
+        <result property="fid" column="fid" jdbcType="INTEGER"/>
+        <result property="fname" column="fname" jdbcType="VARCHAR"/>
+        <result property="fprice" column="fprice" jdbcType="NUMERIC"/>
+        <result property="fcreated" column="fcreated" jdbcType="DATE"/>
+        <result property="tid" column="tid" jdbcType="INTEGER"/>
+
+        <association property="typeDO" javaType="com.csqf.zx.DO.TypeDO">
+            <result property="tid" column="tid" jdbcType="INTEGER"/>
+            <result property="tname" column="tname" jdbcType="VARCHAR"/>
+        </association>
+
+    </resultMap>
+
+    <!--查询所有-->
+    <select id="foodList" resultMap="TbFoodMap">
+        select
+            f.fid,f.fname,f.fprice,f.fcreated,f.tid,t.tname
+        from tb_food f left join tb_type t on f.tid = t.tid
+    </select>
+
+    <!--新增-->
+    <insert id="addFood">
+        insert into tb_food(fname,fprice,fcreated,tid)
+        values (#{food.fname},#{food.fprice},#{food.fcreated},#{food.tid})
+    </insert>
+
+    <!--通过id修改-->
+    <update id="updateFood">
+        update tb_food
+        set fname = #{food.fname},fprice = #{food.fprice},fcreated = #{food.fcreated},tid = #{food.tid}
+        where fid = #{fid}
+    </update>
+
+    <!--通过id删除-->
+    <delete id="deleteFood">
+        delete from tb_food where fid = #{fid}
+    </delete>
+
+</mapper>
+
